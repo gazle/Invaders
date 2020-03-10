@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <MonoGamePlatform>Windows</MonoGamePlatform>
+    <PublishReadyToRun>false</PublishReadyToRun>
+    <TieredCompilation>false</TieredCompilation>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <Version>1.0.1</Version>
+    <PackageIcon>Icon.ico</PackageIcon>
+    <PackageIconUrl />
+    <Company>n/a</Company>
+    <Copyright>Copyright ©  2020</Copyright>
+    <PackageReleaseNotes>Ported to .NET Core</PackageReleaseNotes>
+    <Description>Space Invaders Clone</Description>
+    <Authors>GJL</Authors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Content\background.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Content\background.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MonoGame.Framework.WindowsDX.Core" Version="3.8.0.3" />
+    <PackageReference Include="MonoGame.Content.Builder" Version="3.7.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <MonoGameContentReference Include="Content\Content.mgcb" Visible="true" />
+  </ItemGroup>
+
+</Project>

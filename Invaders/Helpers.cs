@@ -45,16 +45,15 @@ namespace Invaders
             LinkedListNode<T> node = list.First, next;
             while (node != null && condition())
             {
+                next = node.Next;
                 if (!node.Value.IsRemoved)
                 {
                     action(node.Value);
-                    next = node.Next;
                     if (node.Value.IsRemoved)
                         list.Remove(node);
                 }
                 else
                 {
-                    next = node.Next;
                     list.Remove(node);
                 }
                 node = next;

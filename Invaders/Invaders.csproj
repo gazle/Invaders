@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <MonoGamePlatform>Windows</MonoGamePlatform>
     <PublishReadyToRun>false</PublishReadyToRun>
     <TieredCompilation>false</TieredCompilation>
@@ -15,14 +15,16 @@
     <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
     <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
     <AssemblyVersion>1.0.1.0</AssemblyVersion>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <PackageIcon>Icon.ico</PackageIcon>
     <PackageIconUrl />
     <Company>n/a</Company>
-    <Copyright>Copyright ©  2020</Copyright>
-    <PackageReleaseNotes>Ported to .NET Core</PackageReleaseNotes>
+    <Copyright>Copyright ©  2021</Copyright>
+    <PackageReleaseNotes>Updated to .NET 5</PackageReleaseNotes>
     <Description>Space Invaders Clone</Description>
     <Authors>GJL</Authors>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
   </PropertyGroup>
 
   <ItemGroup>

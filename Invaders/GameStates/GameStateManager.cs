@@ -6,7 +6,7 @@ namespace Invaders.GameStates
 {
     static class GameStateManager
     {
-        static Stack<GameState> statesStack = new Stack<GameState>();
+        static readonly Stack<GameState> statesStack = new Stack<GameState>();
         static public GameState CurrentState => statesStack.Peek();
 
         static public void PushState(GameState newState)

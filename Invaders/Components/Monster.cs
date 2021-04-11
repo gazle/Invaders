@@ -5,7 +5,7 @@ namespace Invaders.Components
 {
     class Monster : Sprite, IExplodable
     {
-        MonsterGrid grid;
+        readonly MonsterGrid grid;
         public readonly int Row;
         public readonly int Col;
         public readonly int Score;

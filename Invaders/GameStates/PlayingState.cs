@@ -50,13 +50,13 @@ namespace Invaders.GameStates
             Barricades = new LinkedList<Barricade>();
             Saucers = new LinkedList<Saucer>();
             Messages = new LinkedList<StringSprite>();
-            Line = new Sprite("line", 0, new Vector2(0, MainGame.LineY), this);
+            Line = new Sprite("line", 0, new Vector2(0, MainGame.LineY));
             Player.FirePressed += FireBullet;
             Grid.MonsterExploding += CreateMonsterExplosion;
             Grid.ShotDropped += DropShot;
             Spawner.SpawnedTick += SpawnSaucer;
             for (int i = 0; i < 4; i++)
-                Barricades.AddLast(new Barricade("barricade", new Vector2(32 + i * 45, MainGame.BarricadeY), this));
+                Barricades.AddLast(new Barricade("barricade", new Vector2(32 + i * 45, MainGame.BarricadeY)));
         }
 
         void Initialize()
@@ -113,13 +113,13 @@ namespace Invaders.GameStates
             // Sprite is the object we're exploding so we can calculate the relative position
             Score += monster.Score;
             Texture2D t = Game.TextureDict["explosion"];
-            Explosions.AddLast(new Explosion("explosion", monster.Position + new Vector2((monster.Width - t.Width) / 2, (monster.Height - t.Height) / 2), 16, monster.Tint, this));
+            Explosions.AddLast(new Explosion("explosion", monster.Position + new Vector2((monster.Width - t.Width) / 2, (monster.Height - t.Height) / 2), 16, monster.Tint));
             Game.SoundDict["splat"].Play();
         }
 
         void CreateBulletExplosion(Sprite bullet, Sprite sprite)
         {
-            Explosion exp = new Explosion("bulletexplosion", bullet.Position + new Vector2(-3, -2), 16, this);
+            Explosion exp = new Explosion("bulletexplosion", bullet.Position + new Vector2(-3, -2), 16);
             Explosions.AddLast(exp);
             if (sprite is Barricade)
                 exp.PlotMask(sprite);
@@ -128,7 +128,7 @@ namespace Invaders.GameStates
         void CreateShotExplosionDamage(Sprite shot, Sprite sprite)
         {
             // Create Explosion and damage the Barricade and baseline
-            Explosion exp = new Explosion("shotexplosion", shot.Position + new Vector2(-2, 0), 16, this);
+            Explosion exp = new Explosion("shotexplosion", shot.Position + new Vector2(-2, 0), 16);
             Explosions.AddLast(exp);
             if (sprite.Name == "line")
                 exp.PlotMask(sprite);
@@ -154,7 +154,7 @@ namespace Invaders.GameStates
         void CreateSaucerExplosion(Sprite s, Sprite b)
         {
             Texture2D t = Game.TextureDict["saucerexplosion"];
-            Explosion exp = new Explosion("saucerexplosion", s.Position + new Vector2((s.Width - t.Width) / 2, (s.Height - t.Height) / 2), 30, s.Tint, this);
+            Explosion exp = new Explosion("saucerexplosion", s.Position + new Vector2((s.Width - t.Width) / 2, (s.Height - t.Height) / 2), 30, s.Tint);
             exp.Removing += AddSaucerScore;     // When the Saucer explosion is done show its score
             Explosions.AddLast(exp);
             Game.SoundDict["saucersplat"].Play();
@@ -167,7 +167,7 @@ namespace Invaders.GameStates
             Score += s;
             string message = s.ToString();
             Vector2 box = Game.Font.MeasureString(message);
-            Messages.AddLast(new StringSprite(exp.Position + new Vector2((exp.Width - box.X) / 2, (exp.Height - box.Y) / 2), message, 60, this));
+            Messages.AddLast(new StringSprite(exp.Position + new Vector2((exp.Width - box.X) / 2, (exp.Height - box.Y) / 2), message, 60));
         }
         #endregion
 

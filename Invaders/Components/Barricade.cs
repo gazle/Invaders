@@ -8,8 +8,8 @@ namespace Invaders.Components
     {
         readonly Texture2D[] textures;
 
-        public Barricade(string animKey, Vector2 position, PlayingState playingState)
-        : base(animKey, 0, position, playingState)
+        public Barricade(string animKey, Vector2 position)
+        : base(animKey, 0, position)
         {
             // Give each Barricade its own Textures, not the shared array from AnimDict
             textures = new[] { new Texture2D(Game.GraphicsDevice, 22, 16) };

@@ -11,6 +11,7 @@ namespace Invaders.Components
     {
         public event Action<Monster> MonsterExploding;
         public event Action<string, Monster> ShotDropped;
+        public PlayingState PlayingState;
         public int Count => Monsters.Count;
         const int separationX = 16;
         const int separationY = 8;
@@ -21,15 +22,16 @@ namespace Invaders.Components
         LinkedListNode<Monster> currentMonster;
         public int CurrentXDirection;
         public int CurrentYDirection;
-        int ShotFrequency => rateTable.First(o => o.Score < ((PlayingState)GameState).Score).Rate;
+        int ShotFrequency => rateTable.First(o => o.Score < PlayingState.Score).Rate;
         int plungerIndex;
         int squiggleIndex;
         int shotCounter;
         int dnnCounter;
         int soundCounter;
 
-        public MonsterGrid(PlayingState playingState) : base(playingState)
+        public MonsterGrid(PlayingState playingState)
         {
+            PlayingState = playingState;
             Monsters = new LinkedList<Monster>();
         }
 
@@ -38,21 +40,18 @@ namespace Invaders.Components
             Monsters.Clear();
             int startX = MainGame.LeftSide + 18;
             // First get the rackHeight element for the level we're on
-            int startY = ((PlayingState)GameState).Level == 1 ? Game.RackHeights[0] : Game.RackHeights[(((PlayingState)GameState).Level - 2) % 8 + 1];
+            int startY = PlayingState.Level == 1 ? Game.RackHeights[0] : Game.RackHeights[(PlayingState.Level - 2) % 8 + 1];
             // Convert it to the Y coordinate for the bottom row of the grid
             startY = MainGame.BaseY - separationY * startY;
             for (int row = 0; row < 2; row++)
                 for (int col = 0; col < 11; col++)
-                    Monsters.AddLast(new Monster("bot", new Vector2(startX + col * separationX, startY - row * separationY * 2),
-                        (PlayingState)GameState, row, col, 10, Color.Yellow, this));
+                    Monsters.AddLast(new Monster("bot", new Vector2(startX + col * separationX, startY - row * separationY * 2), row, col, 10, Color.Yellow, this));
             for (int row = 2; row < 4; row++)
                 for (int col = 0; col < 11; col++)
-                    Monsters.AddLast(new Monster("mid", new Vector2(startX + col * separationX + 1, startY - row * separationY * 2),
-                        (PlayingState)GameState, row, col, 20, Color.Blue, this));
+                    Monsters.AddLast(new Monster("mid", new Vector2(startX + col * separationX + 1, startY - row * separationY * 2), row, col, 20, Color.Blue, this));
             for (int row = 4; row < 5; row++)
                 for (int col = 0; col < 11; col++)
-                    Monsters.AddLast(new Monster("top", new Vector2(startX + col * separationX + 2, startY - row * separationY * 2),
-                        (PlayingState)GameState, row, col, 30, Color.Red, this));
+                    Monsters.AddLast(new Monster("top", new Vector2(startX + col * separationX + 2, startY - row * separationY * 2), row, col, 30, Color.Red, this));
             // Receive Removing events from each Monster
             foreach (Monster m in Monsters)
             {
@@ -102,7 +101,7 @@ namespace Invaders.Components
 
         void TryDropScrew()
         {
-            int x = (int)((PlayingState)GameState).Player.Position.X + (((PlayingState)GameState).Player.Width - 1) / 2;
+            int x = (int)PlayingState.Player.Position.X + (PlayingState.Player.Width - 1) / 2;
             Monster m = Monsters.FirstOrDefault(o => (uint)(x - o.Position.X + 2) < o.Width + 4);       // Give Monster 2 pixels berth either side
             if (m != null)
             {
@@ -113,17 +112,17 @@ namespace Invaders.Components
 
         protected override void Update(GameTime gameTime)
         {
-            if (((PlayingState)GameState).Player.ExplodeCounter != -1 || Monsters.Count == 0)
+            if (PlayingState.Player.ExplodeCounter != -1 || Monsters.Count == 0)
                 return;
             shotCounter++;
-            if (((PlayingState)GameState).Shots.Select(o => o.Age).DefaultIfEmpty(1000).Min() >= ShotFrequency)
+            if (PlayingState.Shots.Select(o => o.Age).DefaultIfEmpty(1000).Min() >= ShotFrequency)
                 switch (shotCounter % 3)
                 {
-                    case 0: if (!((PlayingState)GameState).Shots.Any(o => o.Name == "plunger")) TryDropPlunger(); break;
-                    case 1: if (!((PlayingState)GameState).Shots.Any(o => o.Name == "squiggle")) TryDropSquiggle(); break;
-                    case 2: if (!((PlayingState)GameState).Shots.Any(o => o.Name == "screw")) TryDropScrew(); break;
+                    case 0: if (!PlayingState.Shots.Any(o => o.Name == "plunger")) TryDropPlunger(); break;
+                    case 1: if (!PlayingState.Shots.Any(o => o.Name == "squiggle")) TryDropSquiggle(); break;
+                    case 2: if (!PlayingState.Shots.Any(o => o.Name == "screw")) TryDropScrew(); break;
                 }
-            if (((PlayingState)GameState).Explosions.Any(o => o.Name == "explosion"))
+            if (PlayingState.Explosions.Any(o => o.Name == "explosion"))
                 return;
             if (soundCounter-- == 0)
             {

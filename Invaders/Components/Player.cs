@@ -9,12 +9,14 @@ namespace Invaders.Components
     {
         public event Action<Player> FirePressed;
         public int ExplodeCounter;
+        PlayingState playingState;
         readonly Animation aliveAnimation;
         readonly Animation deadAnimation;
 
         public Player(PlayingState playingState)
-            : base("base", 0, playingState)
+            : base("base", 0)
         {
+            this.playingState = playingState;
             aliveAnimation = Animation;
             deadAnimation = new Animation(Game.AnimationDict["dead"], 0x4000);
         }
@@ -33,9 +35,9 @@ namespace Invaders.Components
                 return;
             ExplodeCounter = MainGame.PlayerExplodeTime;
             if (sprite != null)
-                ((PlayingState)GameState).LivesRemaining--;     // Landed
+                playingState.LivesRemaining--;     // Landed
             else
-                ((PlayingState)GameState).LivesRemaining = 0;
+                playingState.LivesRemaining = 0;
             Animation = deadAnimation;
             UpdateRoutine = UpdateExploding;
             Game.SoundDict["baseexp"].Play();

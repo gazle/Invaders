@@ -14,16 +14,14 @@ namespace Invaders.Components
     {
         public string Name;
         public MainGame Game;
-        public GameState GameState;
         public bool IsRemoved;
         public Routine UpdateRoutine;
         public Routine DrawRoutine;
         public event Action<Component> Removing;
 
-        public Component(GameState gameState)
+        public Component()
         {
             Game = MainGame.Current;
-            GameState =  gameState;
             UpdateRoutine = Update;
             DrawRoutine = Draw;
         }

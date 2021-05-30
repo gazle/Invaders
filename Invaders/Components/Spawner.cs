@@ -7,10 +7,12 @@ namespace Invaders.Components
     class Spawner : Component
     {
         public event Action SpawnedTick;
+        PlayingState playingState;
         int framesToSaucer;
 
-        public Spawner(PlayingState playingState) : base(playingState)
+        public Spawner(PlayingState playingState)
         {
+            this.playingState = playingState;
         }
 
         public void Initialize()
@@ -20,7 +22,7 @@ namespace Invaders.Components
 
         protected override void Update(GameTime gameTime)
         {
-            if (((PlayingState)GameState).Grid.Count >= MainGame.MinSaucerSpawn && framesToSaucer-- == 0)
+            if (playingState.Grid.Count >= MainGame.MinSaucerSpawn && framesToSaucer-- == 0)
             {
                 framesToSaucer = MainGame.SaucerFrequency;
                 OnSpawnedTick();

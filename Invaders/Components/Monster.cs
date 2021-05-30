@@ -10,8 +10,8 @@ namespace Invaders.Components
         public readonly int Col;
         public readonly int Score;
 
-        public Monster(string animKey, Vector2 position, PlayingState playingState, int row, int col, int score, Color color, MonsterGrid parentGrid)
-            : base(animKey, 0x10000, position, color, playingState)
+        public Monster(string animKey, Vector2 position, int row, int col, int score, Color color, MonsterGrid parentGrid)
+            : base(animKey, 0x10000, position, color)
         {
             grid = parentGrid;
             Row = row;
@@ -34,13 +34,13 @@ namespace Invaders.Components
             base.Update(gameTime);
             if (Position.Y == MainGame.BaseY)
                 // Landed
-                ((PlayingState)GameState).Player.Explode(null);
+                grid.PlayingState.Player.Explode(null);
         }
 
         protected override void Draw(GameTime gameTime)
         {
             // Draw invader's mask over the barricade
-            foreach (Barricade b in ((PlayingState)GameState).Barricades)
+            foreach (Barricade b in grid.PlayingState.Barricades)
                 PlotMask(b);
             base.Draw(gameTime);
         }

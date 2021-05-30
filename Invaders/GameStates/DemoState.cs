@@ -12,7 +12,7 @@ namespace Invaders.GameStates
 
         public DemoState()
         {
-            monster = new Sprite("top", 0x10000, this);
+            monster = new Sprite("top", 0x10000);
             offset = new Vector2(6, 3);
             yPosition = new Vector2(120, 64);
         }

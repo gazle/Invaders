@@ -7,11 +7,11 @@ namespace Invaders.Components
     {
         int toLive;
 
-        public Explosion(string animKey, Vector2 position, int lifeTime, PlayingState playingState) : this(animKey, position, lifeTime, Color.White, playingState)
+        public Explosion(string animKey, Vector2 position, int lifeTime) : this(animKey, position, lifeTime, Color.White)
         {
         }
 
-        public Explosion(string animKey, Vector2 position, int lifeTime, Color color, PlayingState playingState) : base(animKey, 0, position, color, playingState)
+        public Explosion(string animKey, Vector2 position, int lifeTime, Color color) : base(animKey, 0, position, color)
         {
             toLive = lifeTime;
         }

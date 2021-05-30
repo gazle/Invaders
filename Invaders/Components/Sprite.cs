@@ -21,15 +21,15 @@ namespace Invaders.Components
         public int Top => (int)Position.Y;
         public int Bottom => (int)Position.Y + Height;
 
-        public Sprite(string animKey, int animSpeed, GameState playingState) : this(animKey, animSpeed, Vector2.Zero, playingState)
+        public Sprite(string animKey, int animSpeed) : this(animKey, animSpeed, Vector2.Zero)
         {
         }
 
-        public Sprite(string animKey, int animSpeed, Vector2 position, GameState playingState) : this(animKey, animSpeed, position, Color.White, playingState)
+        public Sprite(string animKey, int animSpeed, Vector2 position) : this(animKey, animSpeed, position, Color.White)
         {
         }
 
-        public Sprite(string animKey, int animSpeed, Vector2 position, Color tint, GameState playingState) : base(playingState)
+        public Sprite(string animKey, int animSpeed, Vector2 position, Color tint)
         {
             Name = animKey;
             Texture2D[] textures = Game.AnimationDict[animKey];

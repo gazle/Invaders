@@ -10,7 +10,7 @@ namespace Invaders.Components
         public Vector2 Position;
         int toLive;
 
-        public StringSprite(Vector2 position, string message, int lifeTime, PlayingState playingState) : base(playingState)
+        public StringSprite(Vector2 position, string message, int lifeTime)
         {
             Position = position;
             Message = message;

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net7.0-windows</TargetFramework>
     <MonoGamePlatform>Windows</MonoGamePlatform>
     <PublishReadyToRun>false</PublishReadyToRun>
     <TieredCompilation>false</TieredCompilation>
@@ -20,11 +20,13 @@
     <PackageIconUrl />
     <Company>n/a</Company>
     <Copyright>Copyright ©  2021</Copyright>
-    <PackageReleaseNotes>Updated to .NET 5</PackageReleaseNotes>
+    <PackageReleaseNotes>Updated to .NET 6</PackageReleaseNotes>
     <Description>Space Invaders Clone</Description>
     <Authors>GJL</Authors>
-    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <EnableNETAnalyzers>False</EnableNETAnalyzers>
     <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
+    <PlatformTarget>x64</PlatformTarget>
+    <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
   </PropertyGroup>
 
   <ItemGroup>
@@ -42,12 +44,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MonoGame.Framework.WindowsDX.Core" Version="3.8.0.3" />
-    <PackageReference Include="MonoGame.Content.Builder" Version="3.7.0.9" />
+    <MonoGameContentReference Include="Content\Content.mgcb" Visible="true" />
   </ItemGroup>
 
   <ItemGroup>
-    <MonoGameContentReference Include="Content\Content.mgcb" Visible="true" />
+    <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
+    <PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.8.1.303" />
   </ItemGroup>
 
 </Project>
